@@ -24,44 +24,36 @@ class _LoginPageState extends State<LoginPage> {
               height: 128,
               child: Image.asset("assets/images/logo.png"),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: "E-mail",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
-              ),
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Senha",
-                labelStyle: TextStyle(
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
-              ),
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
+            _buildSpacing(20),
+            _buildTextFormField(TextInputType.emailAddress, "E-mail"),
+            _buildSpacing(10),
+            _buildTextFormField(TextInputType.text, "Senha"),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTextFormField(TextInputType type, String label) {
+    return TextFormField(
+      keyboardType: type,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(
+          color: Colors.black38,
+          fontWeight: FontWeight.w400,
+          fontSize: 20,
+        ),
+      ),
+      style: TextStyle(
+        fontSize: 20,
+      ),
+    );
+  }
+
+  Widget _buildSpacing(double space) {
+    return SizedBox(
+      height: space,
     );
   }
 }
