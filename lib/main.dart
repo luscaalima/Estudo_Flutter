@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(LoginScreen());
 }
 
-class MyApp extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,21 +13,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginScreenPage(title: 'Tela de Login'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class LoginScreenPage extends StatefulWidget {
+  LoginScreenPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LoginScreenPageState createState() => _LoginScreenPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LoginScreenPageState extends State<LoginScreenPage> {
   int _counter = 0;
 
   void _incrementCounter() {
