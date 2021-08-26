@@ -10,53 +10,56 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
-      body: Padding(
-        padding: EdgeInsets.all(10),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                autofocus: true,
-                keyboardType: TextInputType.number,
-                style: new TextStyle(color: Colors.white, fontSize: 20),
-                decoration: InputDecoration(
-                  labelText: "Login",
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                  ),
+      body: Container(
+        padding: EdgeInsets.only(
+          top: 60,
+          left: 40,
+          right: 40,
+        ),
+        color: Colors.white,
+        child: ListView(
+          children: [
+            SizedBox(
+              width: 128,
+              height: 128,
+              child: Image.asset("assets/images/logo.png"),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: "E-mail",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
                 ),
               ),
-              Divider(),
-              TextField(
-                autofocus: true,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                style: new TextStyle(color: Colors.white, fontSize: 20),
-                decoration: InputDecoration(
-                  labelText: "Senha",
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                  ),
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Senha",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
                 ),
               ),
-              Divider(),
-              ButtonTheme(
-                height: 60.0,
-                child: RaisedButton(
-                  onPressed: () {
-                    print("PASSOU");
-                  },
-                  child: Text(
-                    "Entrar",
-                    style: TextStyle(color: Colors.deepPurple),
-                  ),
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ],
         ),
       ),
     );
