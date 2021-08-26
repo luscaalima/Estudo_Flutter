@@ -6,6 +6,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool visible = true;
+  TextEditingController email;
+  TextEditingController senha;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +29,45 @@ class _LoginPageState extends State<LoginPage> {
               child: Image.asset("assets/images/logo.png"),
             ),
             _buildSpacing(20),
-            _buildTextFormField(TextInputType.emailAddress, "E-mail"),
+            _buildTextFormField(
+                TextInputType.emailAddress, "E-mail", false, this.email),
             _buildSpacing(10),
-            _buildTextFormField(TextInputType.text, "Senha"),
+            Stack(
+              children: [
+                _buildTextFormField(
+                    TextInputType.text, "Senha", this.visible, this.senha),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 280.0,
+                    top: 30.0,
+                    // right: 20.0,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        this.visible = !this.visible;
+                        print("passou setState");
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye_sharp,
+                      size: 30.0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTextFormField(TextInputType type, String label) {
+  Widget _buildTextFormField(TextInputType type, String label, bool showText,
+      TextEditingController controller) {
     return TextFormField(
+      controller: controller,
+      obscureText: showText,
       keyboardType: type,
       decoration: InputDecoration(
         labelText: label,
