@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'dart:math';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -67,38 +68,38 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: SizedBox.expand(
                 child: FlatButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "Login",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.left,
                         ),
-                        textAlign: TextAlign.left,
-                      ),
-                      Container(
-                        child: SizedBox(
-                          child: Image.asset("assets/images/bone.png"),
-                          height: 28,
-                          width: 28,
-                        ),
-                      )
-                    ],
-                  ),
-                  onPressed: () {
-                    if (this.email.text == "Lucas" && this.senha.text == "20") {
+                        Container(
+                          child: SizedBox(
+                            child: Image.asset("assets/images/bone.png"),
+                            height: 28,
+                            width: 28,
+                          ),
+                        )
+                      ],
+                    ),
+                    onPressed: () {
+                      // if (this.email.text == "Lucas" && this.senha.text == "20") {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => Home(),
                         ),
                       );
                     }
-                  },
-                ),
+                    // },
+                    ),
               ),
             ),
             SizedBox(
@@ -152,6 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 onPressed: () {
                   print(this.email.text);
+                  print(sqrt(25));
                   print(this.senha.text);
                 },
               ),
@@ -214,4 +216,8 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
+
+  // void _calculatorSqrt() {
+  //   sqrt(2);
+  // }
 }
