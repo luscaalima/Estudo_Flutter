@@ -24,29 +24,172 @@ class _HomeState extends State<Home> {
 
   void _calculate() {
     print("passou na função");
-    setState(() {
-      double coefA = double.parse(coeficienteA.text);
-      double coefB = double.parse(coeficienteB.text);
-      double coefC = double.parse(coeficienteC.text);
-      double delta = (coefB * coefB) - (4 * coefA * coefC);
-      print(delta);
+    // setState(() {
+    double coefA = double.parse(coeficienteA.text);
+    // double coefB = double.parse(coeficienteB.text);
+    // double coefC = double.parse(coeficienteC.text);
+    // double delta = (coefB * coefB) - (4 * coefA * coefC);
+    // print(delta);
 
-      if (delta == 0) {
-        print("Solução unica");
-        var x1 = -coefB / (2 * coefA);
-        _infoText = "A solução é ${x1} ";
-        print(x1);
-      } else if (delta < 0) {
-        print("Não existe solução nos reais");
-      } else if (delta > 0) {
-        var x1 = -(coefB + sqrt(delta)) / (2 * coefA);
-        var x2 = -(coefB - sqrt(delta)) / (2 * coefA);
-        _infoText = "As solução são ${x1} e ${x2}";
-        print("Existem duas soluções");
+    if (coefA != 0) {
+      _showdialog(coeficienteA, coeficienteB, coeficienteC);
+    }
+  }
+
+  Pattern _getSignalNumber(double num) {
+    print(num);
+    if (num < 0) {
+      String newNum = "$num";
+
+      List<String> newNew = newNum.split(".");
+      print(newNew[0]);
+      return newNew[0];
+    } else {
+      String newNum = "+$num";
+      List<String> newNew = newNum.split(".");
+      return newNew[0];
+    }
+  }
+
+  Future<void> _showdialog(TextEditingController a, TextEditingController b,
+      TextEditingController c) async {
+    double coefA = double.parse(a.text);
+    double coefB = double.parse(b.text);
+    double coefC = double.parse(c.text);
+    print("coeficiente A:" + a.text);
+    print("coeficiente B:" + b.text);
+
+    String newCoefA = _getSignalNumber(coefA);
+    String newCoefB = _getSignalNumber(coefB);
+    String newCoefC = _getSignalNumber(coefC);
+    print(newCoefA);
+
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.white,
+              child: Container(
+                height: 500.0,
+                child: Column(
+                  children: [
+                    _montaPrimeiraLinhaDialog(newCoefA, newCoefB, newCoefC),
+                    // Text(
+                    //   "${_getSignalNumber(coefA)}X² ${_getSignalNumber(coefB)}X ${_getSignalNumber(coefC)} = 0 ",
+                    // style: TextStyle(
+                    //   color: Colors.black87,
+                    //   fontSize: 28.0,
+                    // ),
+                    // ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                "Δ = b² - 4.a.c",
+                                style: TextStyle(
+                                  fontSize: 25,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              // Text(
+                              //   "Δ = ${b.toStringAsPrecision(1)}² - 4.(${a.toStringAsPrecision(1)}).(${c.toStringAsPrecision(1)})",
+                              //   style: TextStyle(
+                              //     fontSize: 25,
+                              //   ),
+                              //   textAlign: TextAlign.center,
+                              // ),
+                              // Text(
+                              //   "Δ = ${delta.toStringAsPrecision(1)}",
+                              //   style: TextStyle(
+                              //     fontSize: 25,
+                              //   ),
+                              //   textAlign: TextAlign.center,
+                              // ),
+                              // Text(
+                              //   "X = -${b.toStringAsPrecision(1)} ± √${delta.toStringAsPrecision(1)} / (2.${a.toStringAsPrecision(1)})",
+                              //   style: TextStyle(
+                              //     fontSize: 25,
+                              //   ),
+                              //   textAlign: TextAlign.center,
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: MaterialButton(
+                          color: Colors.blue,
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(
+                            "Close",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ));
+        });
+  }
+
+  Widget _montaPrimeiraLinhaDialog(String a, String b, String c) {
+    print(a + b + c);
+    // _montaCoeficiente(a, b, c);
+    return Text(
+      "${_montaCoeficiente(a, "a")} ${_montaCoeficiente(b, "b")} ${_montaCoeficiente(c, "c")} = 0 ",
+      style: TextStyle(
+        color: Colors.black87,
+        fontSize: 28.0,
+      ),
+    );
+  }
+
+  String _montaCoeficiente(String variavel, String coeficiente) {
+    // trata todos casos do coeficiente a
+    if (variavel != "" && coeficiente == "a") {
+      if (variavel == "+1") {
+        return variavel = "X²";
       }
+      if (variavel == "-1") {
+        return variavel = "-X²";
+      } else {
+        return variavel = "${variavel}X²";
+      }
+    }
 
-      // _infoText = "INICIO CHANGEEEE CHANGE";
-    });
+    // trata todos casos do coeficiente b
+    else if (variavel != "" && coeficiente == "b") {
+      if (variavel == "+1") {
+        return variavel = "+X";
+      }
+      if (variavel == "-1") {
+        return variavel = "-X";
+      } else if (variavel == "+0") {
+        return variavel = "";
+      } else if (variavel != "+1" && variavel != "+0") {
+        return variavel = "${variavel}X";
+      }
+    }
+
+    // trata todos casos do coeficiente c
+    else if (variavel != "" && coeficiente == "c") {
+      if (variavel == "+0") {
+        return variavel = "";
+      } else {
+        return variavel = variavel;
+      }
+    }
   }
 
   @override
@@ -132,6 +275,7 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       print("passou");
                       _calculate();
+                      // _showdialog();
                     },
                     child: Text(
                       "Calcular",
